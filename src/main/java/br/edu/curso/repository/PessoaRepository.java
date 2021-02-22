@@ -7,6 +7,7 @@ import br.edu.curso.entity.projection.NomeTelefone;
 import br.edu.curso.entity.projection.SemEndereco;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -43,4 +44,9 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
                 "FROM Pessoa p " +
                 "GROUP BY p.nome")
         List<Homonimos> findByHomonimos();
+
+        @Procedure("Pessoa.totalCadastrado")
+        Integer procedureTotalPessoas(Integer argumentos);
+
+
 }

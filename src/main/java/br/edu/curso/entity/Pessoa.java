@@ -15,6 +15,19 @@ import java.util.Set;
         name = "Pessoa.byNome",
         query = "SELECT * FROM pessoa WHERE nome like ?1",
         resultClass = Pessoa.class)
+@NamedStoredProcedureQuery(
+        name = "Pessoa.totalCadastrado",
+        procedureName = "procedure_conta_pessoa",
+        parameters = {
+                @StoredProcedureParameter(
+                        mode = ParameterMode.IN,
+                        name = "argumento",
+                        type = Integer.class),
+                @StoredProcedureParameter(
+                        mode = ParameterMode.OUT,
+                        name = "resulado",
+                        type = Integer.class)
+        })
 public class Pessoa extends AbstractPersistable<Long> {
 
     private String nome;
