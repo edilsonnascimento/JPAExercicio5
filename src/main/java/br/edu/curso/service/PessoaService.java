@@ -7,6 +7,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,5 +48,10 @@ public class PessoaService {
 
         Sort sort = new Sort(Sort.Direction.ASC, "nome");
         return pessoaRepository.findAll(sort);
+    }
+
+    @Transactional(readOnly = false)
+    public void apagar(Pessoa pessoa){
+        pessoaRepository.delete(pessoa);
     }
 }
